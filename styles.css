@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --pink: #ff477e;
+    --deep-pink: #d90452;
+    --purple: #7b2cbf;
+    --ink: #3d234c;
+    --glass: rgba(255, 255, 255, 0.24);
+    --glass-border: rgba(255, 255, 255, 0.5);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4 45%, #fbc2eb);
+}
+
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    filter: blur(10px);
+    opacity: .35;
+    pointer-events: none;
+    animation: floatBlob 8s ease-in-out infinite alternate;
+}
+
+body::before { top: -100px; left: -100px; background: #fff; }
+body::after { right: -100px; bottom: -100px; background: #ff4d6d; animation-delay: -3s; }
+
+#welcome-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(217, 4, 82, .94), rgba(123, 44, 191, .92));
+    transition: opacity .9s ease, transform .9s ease, visibility .9s;
+}
+
+#welcome-screen::before {
+    content: '🎈  ✨  🎂  ✨  🎈';
+    position: absolute;
+    top: 13%;
+    font-size: clamp(1.4rem, 5vw, 2.5rem);
+    letter-spacing: 12px;
+    animation: sway 3s ease-in-out infinite;
+}
+
+#welcome-screen h1 {
+    margin: 0;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.8rem, 9vw, 5.5rem);
+    line-height: 1.1;
+    text-shadow: 0 5px 20px rgba(0,0,0,.2);
+    animation: pulse 1.7s infinite;
+}
+
+#welcome-screen p {
+    margin-top: 22px;
+    padding: 12px 24px;
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 99px;
+    background: rgba(255,255,255,.13);
+    font-size: 1rem;
+    animation: fadeUp 1.5s .4s both;
+}
+
+#welcome-screen.opening { opacity: 0; transform: scale(1.12); visibility: hidden; }
+
+#main-content {
+    position: relative;
+    display: none;
+    min-height: 100vh;
+    padding: clamp(55px, 9vw, 100px) 20px 70px;
+    overflow: hidden;
+    text-align: center;
+}
+
+#main-content.revealed { animation: reveal .9s ease both; }
+
+.title {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: var(--deep-pink);
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3.2rem, 9vw, 6.5rem);
+    line-height: 1;
+    text-shadow: 0 5px 0 rgba(255,255,255,.55), 0 10px 25px rgba(217,4,82,.18);
+    animation: titleDrop 1s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.subtitle {
+    position: relative;
+    z-index: 1;
+    margin: 18px 0 24px;
+    color: #9d174d;
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    animation: fadeUp 1s .25s both;
+}
+
+.message {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    color: #4a254c;
+    background: var(--glass);
+    box-shadow: 0 12px 35px rgba(125, 40, 95, .13), inset 0 1px rgba(255,255,255,.5);
+    backdrop-filter: blur(12px);
+    animation: fadeUp 1s .45s both;
+}
+
+.surprise-button,
+.blow-button {
+    position: relative;
+    z-index: 2;
+    border: 0;
+    border-radius: 999px;
+    padding: 14px 24px;
+    color: white;
+    background: linear-gradient(135deg, var(--deep-pink), var(--purple));
+    box-shadow: 0 10px 24px rgba(123, 44, 191, .25);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.surprise-button { margin-top: 30px; }
+.surprise-button:hover,
+.blow-button:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 30px rgba(123, 44, 191, .35); }
+
+.cake-surprise {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 35px auto 0;
+    padding: 30px 20px 38px;
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    background: rgba(255,255,255,.2);
+    box-shadow: 0 15px 40px rgba(125, 40, 95, .16), inset 0 1px rgba(255,255,255,.6);
+    backdrop-filter: blur(14px);
+    opacity: 0;
+    transform: translateY(35px) scale(.96);
+    pointer-events: none;
+}
+
+.cake-surprise.visible { animation: surpriseIn .8s ease forwards; pointer-events: auto; }
+.cake-surprise h2 { margin: 0 0 15px; color: var(--deep-pink); font-family: 'Dancing Script', cursive; font-size: clamp(2rem, 6vw, 3.3rem); }
+.friendship-message { max-width: 620px; margin: auto; line-height: 1.8; }
+.wish-text, .wish-message { font-weight: 600; }
+.wish-message { min-height: 28px; color: var(--deep-pink); }
+
+.cake { position: relative; width: min(300px, 80vw); height: 215px; margin: 25px auto 8px; }
+.plate { position: absolute; bottom: 4px; left: 2%; width: 96%; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 7px 0 #e6a7c8; }
+.cake-base { position: absolute; bottom: 25px; left: 12%; width: 76%; height: 86px; border-radius: 12px 12px 20px 20px; background: linear-gradient(#ff8fab, #f45b87); box-shadow: inset 0 -15px rgba(190, 24, 93, .15); }
+.cake-top { position: absolute; bottom: 95px; left: 10%; width: 80%; height: 38px; border-radius: 50%; background: #ffd6e0; border: 4px solid #ff8fab; z-index: 1; }
+.icing { position: absolute; bottom: 72px; left: 15%; z-index: 2; width: 70%; color: #9d174d; font-family: 'Dancing Script', cursive; font-size: 1.7rem; }
+.candles { position: absolute; bottom: 126px; left: 25%; z-index: 3; display: flex; justify-content: space-between; width: 50%; }
+.candles span { width: 12px; height: 48px; border-radius: 5px 5px 2px 2px; background: repeating-linear-gradient(135deg, #fff 0 6px, #7b2cbf 6px 11px); }
+.flames { position: absolute; bottom: 174px; left: 25%; z-index: 4; display: flex; justify-content: space-between; width: 50%; }
+.flame { width: 15px; height: 23px; border-radius: 50% 50% 50% 0; background: #ffb703; box-shadow: 0 0 18px #ff8500; transform: rotate(-45deg); animation: flicker .35s ease-in-out infinite alternate; }
+.cake.blown .flames { opacity: 0; transform: translateY(-20px) scale(.2); transition: .4s ease; }
+.cake.blown .flame { animation: none; }
+
+
+.sparkle, .heart {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+}
+.sparkle { color: rgba(255,255,255,.8); font-size: 2.2rem; animation: twinkle 2s ease-in-out infinite; }
+.sparkle-one { top: 18%; left: 10%; }
+.sparkle-two { top: 34%; right: 11%; animation-delay: .8s; }
+.heart { color: rgba(255, 71, 126, .42); font-size: 3rem; animation: drift 6s ease-in-out infinite; }
+.heart-one { top: 10%; right: 8%; }
+.heart-two { bottom: 8%; left: 7%; animation-delay: -2s; }
+
+.confetti { position: fixed; top: -15px; z-index: 10; width: 10px; height: 16px; border-radius: 3px; opacity: 0; pointer-events: none; }
+
+@keyframes pulse { 50% { transform: scale(1.04); } }
+@keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
+@keyframes titleDrop { from { opacity: 0; transform: translateY(-45px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes surpriseIn { from { opacity: 0; transform: translateY(35px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes flicker { to { transform: rotate(-40deg) scale(1.15); } }
+@keyframes fall { 0% { transform: translateY(-10vh) rotate(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+@keyframes floatBlob { to { transform: translate(40px, 25px) scale(1.12); } }
+@keyframes sway { 50% { transform: translateX(15px) rotate(2deg); } }
+@keyframes twinkle { 50% { opacity: .25; transform: scale(.7) rotate(25deg); } }
+@keyframes drift { 50% { transform: translateY(-25px) rotate(12deg); } }
+
+@media (max-width: 600px) {
+    #main-content { padding-top: 70px; }
+    .cake-surprise { padding: 25px 14px 32px; }
+    .friendship-message { font-size: .95rem; }
+    .sparkle-one, .heart-two { left: 3%; }
+    .sparkle-two, .heart-one { right: 3%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

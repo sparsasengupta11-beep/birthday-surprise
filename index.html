@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Piuu! ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- The Screen She Clicks First -->
+    <div id="welcome-screen" onclick="openSurprise()">
+        <h1>I have a surprise for you my moti...😁 🎁</h1>
+        <p>(Tap anywhere to open)</p>
+    </div>
+
+    <!-- The Birthday Content -->
+    <div id="main-content">
+        <div class="sparkle sparkle-one">✦</div>
+        <div class="sparkle sparkle-two">✧</div>
+        <div class="heart heart-one">♥</div>
+        <div class="heart heart-two">♥</div>
+        <h1 class="title">Happy Birthday Piuu! 🎉</h1>
+        <h2 class="subtitle">To my favorite Moti ❤️</h2>
+        <p class="message">
+            Get ready for the best day ever tomorrow on the 16th! You mean the world to me, and I couldn't wait to celebrate you. Here's to more amazing memories together! ✨🎂
+        </p>
+
+        <button class="surprise-button" onclick="showCakeSurprise()">Click here for another surprise 💝</button>
+
+        <section id="cake-surprise" class="cake-surprise" aria-hidden="true">
+            <h2>A little birthday wish for my bestie 💕</h2>
+            <p class="friendship-message">
+                Happy Birthday to my beautiful bestie! Life is so much brighter, funnier, and more special with you in it. Thank you for being my safe place, my biggest supporter, and the person who turns ordinary moments into unforgettable memories. No matter where life takes us, I'll always be grateful for our friendship and all the love, laughter, and madness we share. You deserve every beautiful thing today and always. I love you endlessly! 🎂✨
+            </p>
+
+            <div class="cake" aria-label="Birthday cake with lit candles">
+                <div class="flames">
+                    <span class="flame"></span>
+                    <span class="flame"></span>
+                    <span class="flame"></span>
+                </div>
+                <div class="candles">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="icing">Happy Birthday!</div>
+                <div class="cake-top"></div>
+                <div class="cake-base"></div>
+                <div class="plate"></div>
+            </div>
+            <p class="wish-text">Make a wish and blow out the candles ✨</p>
+            <button class="blow-button" onclick="blowCandles()">Blow out the candles 🕯️</button>
+            <p id="wish-message" class="wish-message" role="status"></p>
+        </section>
+    </div>
+
+    <!-- Links to your separate JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
